@@ -26,7 +26,7 @@ SECRET_KEY = 'j!(9!a5lz$g551oogbdg$d19d=obu2ho7m06*uf^j5of-36(y&'
 DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','downloadevideo.herokuapp.com']
-DISABLE_COLLECTSTATIC=1
+
 
 # Application definition
 
