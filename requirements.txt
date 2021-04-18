@@ -1,0 +1,4 @@
+Django==2.2.2
+gunicorn==20.0.4
+pytube==10.7.1
+whitenoise==5.1.0
