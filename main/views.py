@@ -3,6 +3,7 @@ from django.http import HttpResponse
 import pytube
 from pytube import YouTube  
 import os
+from django.http import FileResponse
 # Create your views here.
 
 def index(request):
@@ -41,7 +42,8 @@ def startdownloding(request):
 		if formatRadio == "audio":
 			yt.streams.filter(type=formatRadio).last().download(dirs)
 		else:
-			yt.streams.filter(type = formatRadio,resolution=qualityRadio).first().download(dirs)
+			#yt.streams.filter(type = formatRadio,resolution=qualityRadio).first().download(dirs)
+			return FileResponse(open(yt.streams.filter(type = formatRadio,resolution=qualityRadio).first().download(skip_existing=True),'rb'))
 		# print("Downloding completed")
 	res = render(request,'index.html',{"msg":"downloading completed"})
 	return res
