@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import pytube
 from pytube import YouTube  
-
+import os
 # Create your views here.
 
 def index(request):
@@ -26,6 +26,8 @@ def download(request):
 
 
 def startdownloding(request):
+	homedir = os.path.expanduser("~")
+	dirs = homedir+'/Downloads'
 	if request.method == 'POST':
 		formatRadio = request.POST['formatRadio']
 		if formatRadio != "audio":
@@ -37,9 +39,9 @@ def startdownloding(request):
 		# print(yt)
 		# print("Downloading start ....")
 		if formatRadio == "audio":
-			yt.streams.filter(type=formatRadio).last().download()
+			yt.streams.filter(type=formatRadio).last().download(dirs)
 		else:
-			yt.streams.filter(type = formatRadio,resolution=qualityRadio).first().download()
+			yt.streams.filter(type = formatRadio,resolution=qualityRadio).first().download(dirs)
 		# print("Downloding completed")
 	res = render(request,'index.html',{"msg":"downloading completed"})
 	return res
